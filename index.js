@@ -28,13 +28,29 @@ async function run() {
 
     const database = client.db("maktabatul-amzad");
     const bookCollection = database.collection("books");
+    const writerCollection = database.collection("writers");
+    const categoryCollection = database.collection("categories");
 
     // Book Related API Start
     app.get("/books", async (req, res) => {
       const books = await bookCollection.find().toArray();
-      res.status("200").send({ books });
+      res.send(books);
     });
     // Book Related API End
+
+    // Writer Related API Start
+    app.get("/writers", async (req, res) => {
+      const writers = await writerCollection.find().toArray();
+      res.send(writers);
+    });
+    // Writer Related API End
+
+    // category Related API Start
+    app.get("/categories", async (req, res) => {
+      const categories = await categoryCollection.find().toArray();
+      res.send(categories);
+    });
+    // category Related API End
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
